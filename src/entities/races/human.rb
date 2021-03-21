@@ -2,7 +2,7 @@ require_relative 'race'
 
 class Human < Race
   def self.race_name
-    'Humano'
+    'Human'
   end
 
   def self.attributes
