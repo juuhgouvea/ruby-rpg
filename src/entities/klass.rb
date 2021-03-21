@@ -1,7 +1,9 @@
 class Klass
-  def initialize(name, habilities, modifiers)
+  @attr_reader = :name, :abilities, :modifiers
+
+  def initialize(name, abilities, modifiers)
     @name = name
-    @habilities = habilities
+    @abilities = abilities
     @modifiers = modifiers
   end
 end
