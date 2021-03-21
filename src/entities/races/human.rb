@@ -1,11 +1,12 @@
 require_relative 'race'
 
 class Human < Race
-  def self.race_name
-    'Human'
+  def initialize(name = 'Human', attributes = default_attributes)
+    super(name, attributes)
   end
 
-  def self.attributes
+  protected
+  def default_attributes
     {
       life: 20,
       attack: 8,
