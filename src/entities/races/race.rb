@@ -1,6 +1,6 @@
 class Race
   def self.race_name
-    'Race'
+    'Raça'
   end
 
   def self.attributes
