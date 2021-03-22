@@ -39,10 +39,23 @@ class Game
 
   def add_klass_to_character(character, klass)
     false if character.nil? || klass.nil?
-
-    puts klass.inspect
-    puts character.inspect
     character.klasses << klass
+  end
+
+  def list_klasses
+    data = []
+    @klass_container.klasses.map do |klass|
+      data << {
+        "name" => klass.name,
+        "life" => klass.modifiers[:life],
+        "attack" => klass.modifiers[:attack],
+        "defense" => klass.modifiers[:defense],
+        "inteligence" => klass.modifiers[:inteligence],
+        "force" => klass.modifiers[:force],
+      }
+    end
+    
+    data
   end
 
   def find_race(values)

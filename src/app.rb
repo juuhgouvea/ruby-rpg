@@ -143,7 +143,7 @@ until selected_option == GAME_OVER_OPTION
     UI.print "\t#{klass.name} class added to #{character.name}'s character", :green if success
     UI.print "\tCould not add #{klass.name} class to #{character.name}'s character'. Try again!", :red unless success
   when '4'
-    UI.print "\tlasses list"
+    UI.table(game.list_klasses)
   when '5'
     UI.print "\tcharacters list by class"
   when '6'
