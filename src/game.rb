@@ -24,7 +24,7 @@ class Game
 
   def create_new_character(name, age, race, klass = [])
     name = generate_character_name if name.nil? || name.empty?
-    new_character = Character.new(name, age, race, klass)
+    new_character = Character.new(name, age, race, [klass])
     @character_container << new_character
 
     new_character
@@ -35,6 +35,14 @@ class Game
     @klass_container << klass
 
     klass
+  end
+
+  def add_klass_to_character(character, klass)
+    false if character.nil? || klass.nil?
+
+    puts klass.inspect
+    puts character.inspect
+    character.klasses << klass
   end
 
   def find_race(values)

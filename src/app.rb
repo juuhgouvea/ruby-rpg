@@ -3,7 +3,14 @@ require_relative 'game'
 
 GAME_OVER_OPTION = '7'
 
-game = Game.new
+game = Game.new(
+  [
+    Klass.new('Builder', ['Build houses'], {force: 1, inteligence: 1, life: -2}),
+    Klass.new('Blacksmith', ['Create swords and armors'], {force: 2, attack: 1}),
+    Klass.new('Healer', ['Heal other units'], {defense: 3, attack: -1, inteligence: 3}),
+    Klass.new('Warrior', ['Attack, Defend'], {defense: 2, attack: 3, force: 2})
+  ]
+)
 selected_option = '0'
 
 def render_menu
@@ -49,7 +56,7 @@ def ask_for_character(message, game)
 
   until game.character_exists?(character_name)
     character_name = UI.ask message
-    character = game.find_klass([character_name]).first
+    character = game.find_character([character_name.downcase.strip]).first
 
     UI.print "\tCharacter doesn't exist. Try again!", :red if character.nil?
   end
@@ -63,6 +70,7 @@ until selected_option == GAME_OVER_OPTION
   UI.clear
 
   available_klasses = game.klasses.map { |klass| klass.name.strip }
+  available_characters = game.characters.map { |character| character.name.strip }
 
   case selected_option
   when '1'
@@ -125,7 +133,15 @@ until selected_option == GAME_OVER_OPTION
 
     klass = game.create_new_klass(name, abilities, modifiers)
   when '3'
-    UI.print "\tnew class acquired"
+    UI.print "\tWhat's the character name? [#{available_characters.join(', ')}]", :yellow
+    character = ask_for_character("\t> ", game)
+    UI.print "\tWhat's the class name? [#{available_klasses.join(', ')}]", :yellow
+    klass = ask_for_klass("\t> ", game)
+
+    success = game.add_klass_to_character(character, klass)
+
+    UI.print "\t#{klass.name} class added to #{character.name}'s character", :green if success
+    UI.print "\tCould not add #{klass.name} class to #{character.name}'s character'. Try again!", :red unless success
   when '4'
     UI.print "\tlasses list"
   when '5'
