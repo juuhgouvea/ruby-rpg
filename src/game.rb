@@ -46,62 +46,62 @@ class Game
     data = []
     @klass_container.klasses.map do |klass|
       data << {
-        "name" => klass.name,
-        "life" => klass.modifiers[:life],
-        "attack" => klass.modifiers[:attack],
-        "defense" => klass.modifiers[:defense],
-        "inteligence" => klass.modifiers[:inteligence],
-        "force" => klass.modifiers[:force],
+        'name' => klass.name,
+        'life' => klass.modifiers[:life],
+        'attack' => klass.modifiers[:attack],
+        'defense' => klass.modifiers[:defense],
+        'inteligence' => klass.modifiers[:inteligence],
+        'force' => klass.modifiers[:force]
       }
     end
-    
+
     data
   end
 
   def list_characters_by_race(race)
     result = @character_container.characters.select { |character| character.race.name == race.name }
     data = []
-    
+
     result.map do |character|
       attributes = character.calculate_attributes
       klasses_name = character.klasses.map { |klass| klass.name }
       data << {
-        "name" => character.name,
-        "race" => character.race.name,
-        "classes" => klasses_name.join(', '),
-        "life" => attributes[:life],
-        "attack" => attributes[:attack],
-        "defense" => attributes[:defense],
-        "inteligence" => attributes[:inteligence],
-        "force" => attributes[:force],
+        'name' => character.name,
+        'race' => character.race.name,
+        'classes' => klasses_name.join(', '),
+        'life' => attributes[:life],
+        'attack' => attributes[:attack],
+        'defense' => attributes[:defense],
+        'inteligence' => attributes[:inteligence],
+        'force' => attributes[:force]
       }
     end
-    
+
     data
   end
-  
+
   def list_characters_by_klass(klass)
     result = @character_container.characters.select do |character|
       character.klasses.include?(klass)
     end
-    
+
     data = []
-    
+
     result.map do |character|
       attributes = character.calculate_attributes
       klasses_name = character.klasses.map { |klass| klass.name }
       data << {
-        "name" => character.name,
-        "race" => character.race.name,
-        "classes" => klasses_name.join(', '),
-        "life" => attributes[:life],
-        "attack" => attributes[:attack],
-        "defense" => attributes[:defense],
-        "inteligence" => attributes[:inteligence],
-        "force" => attributes[:force],
+        'name' => character.name,
+        'race' => character.race.name,
+        'classes' => klasses_name.join(', '),
+        'life' => attributes[:life],
+        'attack' => attributes[:attack],
+        'defense' => attributes[:defense],
+        'inteligence' => attributes[:inteligence],
+        'force' => attributes[:force]
       }
     end
-    
+
     data
   end
 
