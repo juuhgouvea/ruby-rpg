@@ -1,3 +1,4 @@
+require 'table_print'
 module UI
   COLORS = {
     black: "\u001b[30m",
@@ -23,6 +24,10 @@ module UI
   def ask(message, color = :yellow)
     print(message, color, breakline: false)
     gets.strip
+  end
+
+  def table(data)
+    tp data
   end
 
   def clear
