@@ -30,17 +30,44 @@ class Game
     new_character
   end
 
-  def find_race(name)
-    @race_container.find_by_name(name)
+  def create_new_klass(name, abilities = [], modifiers = {})
+    klass = Klass.new(name, abilities, modifiers)
+    @klass_container << klass
+
+    klass
   end
 
-  def find_klass(name)
-    @klass_container.find_by_name(name)
+  def find_race(values)
+    @race_container.find_by_name(values)
+  end
+
+  def find_klass(values)
+    @klass_container.find_by_name(values)
+  end
+
+  def find_character(values)
+    @character_container.find_by_name(values)
+  end
+
+  def race_exists?(name)
+    find_race([name]).any?
+  end
+
+  def klass_exists?(name)
+    find_klass([name]).any?
+  end
+
+  def character_exists?(name)
+    find_character([name]).any?
   end
 
   private
 
   def generate_character_name
-    Faker::Games::Witcher.character
+    begin
+      name = Faker::Games::Witcher.character
+    end while character_exists?(name)
+
+    name
   end
 end
