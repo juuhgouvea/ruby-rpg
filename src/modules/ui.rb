@@ -24,4 +24,8 @@ module UI
     print(message, color, breakline: false)
     gets.strip
   end
+
+  def clear
+    puts `clear`
+  end
 end
